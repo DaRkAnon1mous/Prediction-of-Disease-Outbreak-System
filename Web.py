@@ -3,12 +3,22 @@ import pickle ## for pre trained model loading
 import streamlit as st ## for web app
 from streamlit_option_menu import option_menu
 
-st.set_page_config(page_title = 'Prediction of Disease Outbreaks',
-                   layout = 'wide',
-                   page_icon='doctor')
-diabetes_model = pickle.load(open(r"C:\Users\shrey\OneDrive\Documents\Prediction of Disease Outbreak\Training_Models\diabetes_model.sav","rb"))
-heart_disease_model = pickle.load(open(r"C:\Users\shrey\OneDrive\Documents\Prediction of Disease Outbreak\Training_Models\Heart_disease_model.sav","rb"))
-parkinsons_model = pickle.load(open(r"C:\Users\shrey\OneDrive\Documents\Prediction of Disease Outbreak\Training_Models\Parkinsons_Model.sav","rb"))
+st.set_page_config(page_title='Prediction of Disease Outbreaks',
+                   layout='wide',
+                   page_icon="🧑‍⚕️")
+
+model_dir = os.path.join(os.path.dirname(__file__), "Training_Models")
+
+with open(os.path.join(model_dir, "diabetes_model.sav"), "rb") as model_file:
+    diabetes_model = pickle.load(model_file)
+
+with open(os.path.join(model_dir, "Heart_disease_model.sav"), "rb") as model_file:
+    heart_disease_model = pickle.load(model_file)
+
+with open(os.path.join(model_dir, "Parkinsons_Model.sav"), "rb") as model_file:
+    parkinsons_model = pickle.load(model_file)
+
+
 
 with st.sidebar:
     selected = option_menu('Prediction of disease outbreak system',['Diabetes Prediction','Heart Disease Prediction','Parkinsons Prediction'],
